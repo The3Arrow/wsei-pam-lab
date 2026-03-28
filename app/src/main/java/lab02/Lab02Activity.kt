@@ -1,12 +1,13 @@
 package lab02
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import lab3.Lab003Activity
 import pl.wsei.pam.lab01.R
 
 class Lab02Activity : AppCompatActivity() {
@@ -21,16 +22,17 @@ class Lab02Activity : AppCompatActivity() {
         }
     }
     fun onBoardSizeClick(view: View) {
-        // Rzutowanie tagu na String
         val tagString = view.tag as String
-
         val dimensions = tagString.split(" ")
 
         if (dimensions.size == 2) {
             val columns = dimensions[0].toInt()
             val rows = dimensions[1].toInt()
 
-            Toast.makeText(this, "Wybrano planszę: $columns kolumn x $rows wierszy", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, Lab003Activity::class.java)
+            val size = intArrayOf(columns, rows)
+            intent.putExtra("size", size)
+            startActivity(intent)
         }
     }
 }
